@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 #define SORT_BY_ARRIVAL 0
 #define SORT_BY_PID 1
@@ -16,9 +17,13 @@ void inputProcess(int n, PCB P[])
 {
     for (int i = 0; i < n; ++i)
     {
-        printf("Please input Process ID, Arrival Time, Burst Time of Process %d: ", i + 1);
-        scanf("%d %d %d", &P[i].iPID, &P[i].iArrival, &P[i].iBurst);
+        //printf("Please input Process ID, Arrival Time, Burst Time of Process %d: ", i + 1);
+        //scanf("%d %d %d", &P[i].iPID, &P[i].iArrival, &P[i].iBurst);
+        P[i].iPID = i + 1;
+        P[i].iArrival = rand() % 21;
+        P[i].iBurst = rand() % 11 + 2;
         P[i].iStart = P[i].iFinish = P[i].iWaiting = P[i].iResponse = P[i].iTaT = 0;
+        printf("Process ID, Arrival Time, Burst Time of Process %d: %d %d %d\n", i + 1, P[i].iPID, P[i].iArrival, P[i].iBurst);
     }
 }
 
@@ -159,6 +164,7 @@ void calculateATaT(int n, PCB P[])
 
 int main()
 {
+    srand(time(NULL));
     PCB Input[10];
     PCB ReadyQueue[10];
     PCB TerminatedArray[10];

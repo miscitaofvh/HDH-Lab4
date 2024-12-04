@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 #include <stdbool.h>
 
 #define SORT_BY_ARRIVAL 0
@@ -17,10 +18,13 @@ void inputProcess(int n, PCB P[])
 {
     for (int i = 0; i < n; ++i)
     {
-        printf("Please input Process ID, Arrival Time, Burst Time of Process %d: ", i + 1);
-        scanf("%d %d %d", &P[i].iPID, &P[i].iArrival, &P[i].iBurst);
-        P[i].iStart = P[i].iFinish  = P[i].iResponse = P[i].iTaT = 0;
-        P[i].iWaiting  = -P[i].iBurst; // P[i].iWaiting = P[i].iFinish - P[i].iArrival - P[i].iBurst
+        //printf("Please input Process ID, Arrival Time, Burst Time of Process %d: ", i + 1);
+        //scanf("%d %d %d", &P[i].iPID, &P[i].iArrival, &P[i].iBurst);
+        P[i].iPID = i + 1;
+        P[i].iArrival = rand() % 21;
+        P[i].iBurst = rand() % 11 + 2;
+        P[i].iStart = P[i].iFinish = P[i].iWaiting = P[i].iResponse = P[i].iTaT = 0;
+        printf("Process ID, Arrival Time, Burst Time of Process %d: %d %d %d\n", i + 1, P[i].iPID, P[i].iArrival, P[i].iBurst);
     }
 }
 
@@ -196,6 +200,7 @@ int min(int a, int b) {
 
 int main()
 {
+    srand(time(NULL));
     PCB Input[10];
     PCB ReadyQueue[10];
     PCB TerminatedArray[10];
